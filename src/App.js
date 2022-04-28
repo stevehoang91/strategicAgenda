@@ -1,5 +1,6 @@
 import { apiKey } from "./utils";
 import { useState } from "react";
+import AutoCorrect from "./AutoCorrect";
 
 const App = () => {
   const [input, setInput] = useState();
@@ -33,18 +34,18 @@ const App = () => {
 
   return (
     <>
-      <h1>Write your text here</h1>
-      <input
-        type="text"
-        name="textInput"
-        placeholder="Write your message her"
-        onInput={(e) => {
-          onInput(e);
-        }}
-      ></input>
-      {/* <div>
-        <p>{autoCorrect.corrections.best_candidate}</p>
-      </div> */}
+      <div>
+        <h1>Write your text here</h1>
+        <input
+          type="text"
+          name="textInput"
+          placeholder="Write your message her"
+          onInput={(e) => {
+            onInput(e);
+          }}
+        ></input>
+      </div>
+      <AutoCorrect />
     </>
   );
 };
