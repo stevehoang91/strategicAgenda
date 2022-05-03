@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+    <meta name="description" content="" />
+
+    <style>
+      .toolbar {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        background: #ccc;
+        height: 3rem;
+      }
+
+      .toobarButton {
+        margin-right: 0.4rem;
+      }
+
+      .rows {
+      }
+
+      .row {
+        display: flex;
+        flex-flow: row nowrap;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .row .col {
+        display: flex;
+        width: 50%;
+        min-height: 3rem;
+        padding: 0.25rem;
+      }
+
+      .row .col:first-child {
+        border-right: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <a href="#" class="toobarButton lnkUndo">Undo</a>
+      <a href="#" class="toobarButton lnkRedo">Redo</a>
+      <a href="#" class="toolbarButton lnkPasteAsPlainText"
+        >Paste as plain text</a
+      >
+
+      <a href="#" class="toolbarButton">Paste as plain text</a>
+      <a href="#" class="toolbarButton">Paste as plain text</a>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div class="col src">
+          Promote the partnership between management and staff with a view to
+          strengthening the organization to implement its mandate;
+        </div>
+        <div class="col trg" contenteditable="true">editable text 1</div>
+      </div>
+      <div class="row">
+        <div class="col src">
+          Support the establishment and strengthening of staff associations at
+          all levels of the organization.
+        </div>
+        <div class="col trg" contenteditable="true">editable text 2</div>
+      </div>
+      <div class="row">
+        <div class="col src">
+          The newly elected officials shall be in office by the first of January
+          following the election.
+        </div>
+        <div class="col trg" contenteditable="true">editable text 3</div>
+      </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+
+      $(function () {
+        var $B = $("body"),
+          _undo = function () {},
+          _redo = function () {},
+          _pasteAsPlainText = function () {};
+
+        $B
+          //mouse actions
+          .on("click", ".lnkUndo", function (e) {
+            e.preventDefault();
+            _undo();
+          })
+          .on("click", ".lnkRedo", function (e) {
+            e.preventDefault();
+            _redo();
+          })
+          .on("click", ".lnkPasteAsPlainText", function (e) {
+            e.preventDefault();
+            _pasteAsPlainText();
+          })
+
+          //keystrokes
+          .on("keyup", function (e) {
+            /*if (e.keyCode == ) {
+      				_undo();
+      				return;
+      			}
+
+      			if (e.keyCode == ) {
+      				_redo();
+      				return;
+      			}
+
+      			if (e.keyCode == ) {
+      				_pasteAsPlainText();
+      				return;
+      			}*/
+          });
+      });
+    </script>
+  </body>
+</html>

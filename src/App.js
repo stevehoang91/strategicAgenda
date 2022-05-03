@@ -3,7 +3,8 @@ import { useState } from "react";
 import AutoCorrect from "./AutoCorrect";
 
 const App = () => {
-  const [input, setInput] = useState();
+  const [input, setInput] = useState("");
+  const [correction, setCorrection] = useState(undefined);
   var myHeaders = new Headers();
   myHeaders.append("apikey", apiKey);
 
@@ -13,39 +14,44 @@ const App = () => {
     headers: myHeaders,
   };
 
-  let autoCorrect;
-
   const onInput = async (e) => {
     setInput(e.target.value);
     console.log(input, input.length);
     if (input.length > 3) {
-      let result = await fetch(
-        `https://api.apilayer.com/spell/spellchecker?q=${input}`,
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((result) => console.log(result))
-        .catch((error) => console.log("error", error));
-      autoCorrect = result;
+      fetchText(e.target.value);
     }
   };
 
-  console.log(autoCorrect);
+  async function fetchText(input) {
+    let response = await fetch(
+      `https://api.apilayer.com/spell/spellchecker?q=${input}`,
+      requestOptions
+    );
+    let data = await response.json();
+    setCorrection(data);
+  }
 
   return (
     <>
-      <div>
-        <h1>Write your text here</h1>
+      <div className="container">
+        <h1>Auto-Correct</h1>
         <input
+          value={input}
           type="text"
           name="textInput"
-          placeholder="Write your message her"
+          id="text"
+          placeholder="Write your message here"
           onInput={(e) => {
             onInput(e);
           }}
         ></input>
       </div>
-      <AutoCorrect />
+      <AutoCorrect
+        correction={correction}
+        setInput={setInput}
+        input={input}
+        fetchText={fetchText}
+      />
     </>
   );
 };
